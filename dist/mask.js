@@ -635,6 +635,14 @@ angular.module('ui.mask', [])
                                 }
 
                                 // Update values
+                                if (oldValueUnmasked !== "" && oldValueUnmasked !== valUnmasked && !isDeletion) {
+                                    var charIndex = maskCaretMap.indexOf(caretPos);
+                                    if (charIndex === -1) {
+                                        charIndex = maskCaretMap.indexOf(caretPos + 1);
+                                    }
+                                    valUnmasked = valUnmasked.substr(0, charIndex).concat(oldValueUnmasked.substr(charIndex, valUnmasked.length));
+                                }
+
                                 valMasked = maskValue(valUnmasked);
 
                                 oldValue = valMasked;
